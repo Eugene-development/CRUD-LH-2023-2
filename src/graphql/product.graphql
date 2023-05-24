@@ -1,0 +1,98 @@
+type Product {
+    id: ID
+    key: String!
+    is_active: Boolean
+    slug: String
+    value: String!
+    created_at: String
+    updated_at: String
+    price: Price @morphOne
+    unit: Unit @morphOne
+    text: Text @morphOne
+    image: Image @morphOne
+    parentable: Parentable @morphTo
+}
+
+extend type Query {
+    product(key: String @eq): [Product] @all
+    product_one(slug: String! @eq, key: String! @eq): Product @find
+    product_price(key: String @eq): [Product] @all
+    # product_cart(id: ID @eq): [Product] @all
+}
+
+extend type Mutation {
+    createProduct(input: CreateProductInput @spread): Product @create
+    updateProduct(input: UpdateProductInput @spread): Product @update
+    deleteProduct(id: ID! @whereKey): Product @delete
+}
+
+input CreateProductInput {
+    key: String!
+    # is_active: Boolean
+    value: String!
+    slug: String
+    parentable_type: String
+    parentable_id: Int!
+    price: CreatePriceMorphMany
+    unit: CreateUnitMorphMany
+    image: CreateImageMorphMany
+}
+
+input UpdateProductInput {
+    id: ID!
+    key: String!
+    is_active: Boolean
+    value: String!
+    slug: String
+    parentable_type: String
+    parentable_id: Int
+    price: UpdatePriceMorphMany
+}
+
+# type Product {
+#     id: ID
+#     key: String!
+#     is_active: Boolean
+#     slug: String
+#     value: String!
+#     created_at: String
+#     updated_at: String
+#     # property: [Property!] @morphMany
+#     parentable: Parentable! @morphTo
+# }
+
+# extend type Query {
+#     product(key: String @eq): [Product] @all
+#     product_one(id: ID! @eq, key: String! @eq): Product @find
+
+#     products(orderBy: _ @orderBy(columns: ["value"])): [Product] @all
+#     product_where(key: String @where(operator: "1234")): [Product] @all
+#     product_w(key: String @eq, active: Boolean @eq): [Product] @all
+# }
+
+# extend type Mutation {
+#     createProduct(input: CreateProductInput @spread): Product @create
+#     updateProduct(input: UpdateProductInput @spread): Product @update
+#     deleteProduct(id: ID!): Product @delete
+# }
+
+# input CreateProductInput {
+#     key: String!
+#     is_active: Boolean
+#     value: String!
+#     slug: String
+#     parentable_type: String
+#     parentable_id: Int!
+#     property: CreatePropertyMorphMany
+# }
+
+# input UpdateProductInput {
+#     id: ID!
+#     key: String!
+#     is_active: Boolean
+#     value: String!
+#     slug: String
+#     parentable_type: String
+#     parentable_id: Int
+#     property: UpdatePropertyMorphMany
+# }

@@ -1,0 +1,44 @@
+type Rubric {
+    id: ID
+    key: String!
+    is_active: Boolean
+    slug: String
+    value: String!
+    created_at: String
+    updated_at: String
+    category: [Category] @morphMany
+    text: [Text] @morphMany
+    parentable: Parentable! @morphTo
+}
+
+extend type Query {
+    rubric(key: String @eq): [Rubric] @all
+    rubric_one(slug: String! @eq, key: String! @eq): Rubric @find
+}
+
+extend type Mutation {
+    createRubric(input: CreateRubricInput @spread): Rubric @create
+    updateRubric(input: UpdateRubricInput @spread): Rubric @update
+    deleteRubric(id: ID! @whereKey): Rubric @delete
+}
+
+input CreateRubricInput {
+    key: String!
+    is_active: Boolean
+    value: String!
+    slug: String
+    parentable_type: String
+    parentable_id: Int!
+    # property: CreatePropertyMorphMany
+}
+
+input UpdateRubricInput {
+    id: ID!
+    key: String!
+    is_active: Boolean
+    value: String!
+    slug: String
+    parentable_type: String
+    parentable_id: Int
+    # property: UpdatePropertyMorphMany
+}

@@ -1,0 +1,36 @@
+type Menu {
+    id: ID
+    key: String
+    is_active: Boolean
+    slug: String
+    value: String
+}
+
+extend type Query {
+    menu(key: String @eq): [Menu] @all
+}
+
+extend type Mutation {
+    createMenu(input: CreateMenuInput @spread): Menu @create
+    updateMenu(input: UpdateMenuInput @spread): Menu @update
+    deleteMenu(id: ID! @whereKey): Menu @delete
+}
+
+input CreateMenuInput {
+    key: String!
+    is_active: Boolean
+    value: String!
+    slug: String
+    parentable_type: String
+    parentable_id: Int
+    # property: CreatePropertyMorphMany
+}
+
+input UpdateMenuInput {
+    id: ID!
+    key: String!
+    is_active: Boolean
+    value: String!
+
+    # property: UpdatePropertyMorphMany
+}

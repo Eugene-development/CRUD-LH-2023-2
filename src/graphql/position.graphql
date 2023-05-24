@@ -1,0 +1,14 @@
+type Position {
+    id: ID
+    key: String
+    value: Int
+    created_at: String
+    parentable_type: String
+    parentable_id: String
+    parentable: Parentable! @morphTo
+}
+
+extend type Query {
+    position: [Position] @all
+    # first_position: [Position] @first
+}

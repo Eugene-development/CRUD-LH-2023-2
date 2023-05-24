@@ -1,0 +1,12 @@
+type Cart {
+    id: ID
+    key: String!
+    session_user: String
+    product_id: String
+    # parentable: Parentable! @morphTo
+}
+
+extend type Query {
+    cart: [Cart] @all
+    # id_product_in_cart(session_user: String! @eq): [Cart] @all
+}

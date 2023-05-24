@@ -1,0 +1,14 @@
+type SeoQuery {
+    id: ID
+    key: String
+    value: String
+    position: [Position] @morphMany
+    resource: [Resource!] @morphMany
+    parentable_type: String
+    parentable_id: String
+    parentable: Parentable @morphTo
+}
+
+extend type Query {
+    seoQuery: [SeoQuery] @all
+}

@@ -1,0 +1,26 @@
+type Unit {
+    id: ID
+    key: String
+    active: Boolean
+    value: String
+    parentable_type: String
+    parentable_id: String
+    parentable: Parentable! @morphTo
+}
+
+extend type Query {
+    unit: [Unit] @all
+}
+
+extend type Mutation {
+    createUnit(input: CreateUnitInput @spread): Unit @create
+}
+
+input CreateUnitInput {
+    key: String!
+    value: String!
+}
+
+input CreateUnitMorphMany {
+    create: CreateUnitInput!
+}

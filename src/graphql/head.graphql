@@ -1,0 +1,36 @@
+type Head {
+    id: ID
+    key: String
+    is_active: Boolean
+    slug: String
+    value: String
+}
+
+extend type Query {
+    head: [Head] @all
+}
+
+extend type Mutation {
+    createHead(input: CreateHeadInput @spread): Head @create
+    updateHead(input: UpdateHeadInput @spread): Head @update
+    deleteHead(id: ID! @whereKey): Head @delete
+}
+
+input CreateHeadInput {
+    key: String!
+    is_active: Boolean
+    value: String!
+    slug: String
+    parentable_type: String
+    parentable_id: Int
+    # property: CreatePropertyMorphMany
+}
+
+input UpdateHeadInput {
+    id: ID!
+    key: String!
+    is_active: Boolean
+    value: String!
+
+    # property: UpdatePropertyMorphMany
+}

@@ -1,0 +1,47 @@
+type Category {
+    id: ID
+    key: String!
+    is_active: Boolean
+    slug: String
+    value: String!
+    created_at: String
+    updated_at: String
+    product: [Product] @morphMany
+    text: [Text] @morphMany
+    seoTitle: SeoTitle @morphOne
+    seoDescription: SeoDescription @morphOne
+    parentable: Parentable! @morphTo
+}
+
+extend type Query {
+    category(key: String @eq): [Category] @all
+    category_one(slug: String! @eq, key: String! @eq): Category @find
+    category_one_id(id: ID! @eq, key: String! @eq): Category @find
+}
+
+extend type Mutation {
+    createCategory(input: CreateCategoryInput @spread): Category @create
+    updateCategory(input: UpdateCategoryInput @spread): Category @update
+    deleteCategory(id: ID! @whereKey): Category @delete
+}
+
+input CreateCategoryInput {
+    key: String!
+    is_active: Boolean
+    value: String!
+    slug: String
+    parentable_type: String
+    parentable_id: Int!
+}
+
+input UpdateCategoryInput {
+    id: ID!
+    key: String!
+    is_active: Boolean
+    value: String!
+    slug: String
+    parentable_type: String
+    parentable_id: Int
+    seoTitle: UpdateSeoTitleMorphOne
+    seoDescription: UpdateSeoDescriptionMorphOne
+}

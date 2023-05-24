@@ -1,0 +1,36 @@
+#import project.graphql
+#import menu.graphql
+#import catalog.graphql
+#import rubric.graphql
+#import category.graphql
+#import product.graphql
+#import property.graphql
+#import price.graphql
+#import unit.graphql
+#import text.graphql
+#import image.graphql
+#import resource.graphql
+#import position.graphql
+#import cart.graphql
+#import seoQuery.graphql
+#import seoTitle.graphql
+#import seoDescription.graphql
+
+union Parentable =
+      Project
+    | Menu
+    | Catalog
+    | Rubric
+    | Category
+    | Product
+    | Property
+    | Price
+    | Unit
+    | Text
+    | Image
+    | Resource
+    | Position
+    | Cart
+    | SeoQuery
+    | SeoTitle
+    | SeoDescription

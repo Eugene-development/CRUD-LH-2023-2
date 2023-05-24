@@ -1,0 +1,44 @@
+type Catalog {
+    id: ID
+    key: String!
+    is_active: Boolean
+    slug: String
+    value: String
+    created_at: String
+    updated_at: String
+    rubric: [Rubric] @morphMany
+    text: [Text] @morphMany
+    parentable: Parentable! @morphTo
+}
+
+extend type Query {
+    catalog(key: String! @eq): [Catalog] @all
+    catalog_one(slug: String! @eq, key: String! @eq): Catalog @find
+}
+
+extend type Mutation {
+    createCatalog(input: CreateCatalogInput @spread): Catalog @create
+    updateCatalog(input: UpdateCatalogInput @spread): Catalog @update
+    deleteCatalog(id: ID! @whereKey): Catalog @delete
+}
+
+input CreateCatalogInput {
+    key: String!
+    is_active: Boolean
+    value: String!
+    slug: String
+    parentable_type: String
+    parentable_id: Int
+    # property: CreatePropertyMorphMany
+}
+
+input UpdateCatalogInput {
+    id: ID!
+    key: String!
+    is_active: Boolean
+    value: String!
+    slug: String
+    parentable_type: String
+    parentable_id: Int
+    # property: UpdatePropertyMorphMany
+}

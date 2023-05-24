@@ -1,0 +1,37 @@
+type Property {
+    id: ID
+    key: String
+    active: Boolean
+    value: String
+    slug: String
+    parentable_type: String
+    parentable_id: String
+    parentable: Product @morphTo
+}
+
+extend type Query {
+    property: [Property] @all
+}
+
+extend type Mutation {
+    createProperty(input: CreatePropertyInput @spread): Property @create
+}
+
+input CreatePropertyMorphMany {
+    create: [CreatePropertyInput]
+}
+input CreatePropertyInput {
+    key: String!
+    value: String!
+    slug: String!
+}
+
+input UpdatePropertyMorphMany {
+    create: [CreatePropertyInput]
+    update: [UpdatePropertyInput]
+    delete: [ID!]
+}
+input UpdatePropertyInput {
+    id: ID!
+    value: String!
+}
