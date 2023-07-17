@@ -20,6 +20,8 @@ class GzipMiddleware
         $content = $response->content();
         $data = gzencode($content, 9);
 
+        // return response($data);
+
         return response($data)->withHeaders([
             'Access-Control-Allow-Origin' => '*',
             'Access-Control-Allow-Methods' => 'POST',
