@@ -65,6 +65,28 @@ return [
             ]) + [PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => '~/.mysql/root.crt'] : [],
         ],
 
+        'mysqlZOV' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL_ZOV'),
+            'host' => env('DB_HOST_ZOV', '127.0.0.1'),
+            'port' => env('DB_PORT_ZOV', '3306'),
+            'database' => env('DB_DATABASE_ZOV', 'forge'),
+            'username' => env('DB_USERNAME_ZOV', 'forge'),
+            'password' => env('DB_PASSWORD_ZOV', ''),
+            'unix_socket' => env('DB_SOCKET_ZOV', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => '/path/ca.pem',
+                PDO::MYSQL_ATTR_SSL_KEY => '/path/client-key.pem',
+                PDO::MYSQL_ATTR_SSL_CERT => '/path/client-cert.pem',
+            ]) + [PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => '~/.mysql/root.crt'] : [],
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

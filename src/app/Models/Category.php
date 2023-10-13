@@ -7,14 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Http\Request;
 
-class Category extends Model
+class Category extends RootModel
 {
     use HasFactory;
 
     protected $guarded = [];
 
     protected $table = 'category';
+
+
+
+
+
+
 
     public function product(): MorphMany
     {
