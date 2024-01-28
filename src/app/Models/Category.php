@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
 
-class Category extends RootModel
+class Category extends Model
 {
     use HasFactory;
 

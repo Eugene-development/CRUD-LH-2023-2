@@ -23,6 +23,8 @@ extend type Query {
 extend type Mutation {
     createProduct(input: CreateProductInput @spread): Product @create
     updateProduct(input: UpdateProductInput @spread): Product @update
+    updateStatusProduct(input: UpdateStatusProductInput @spread): Product
+        @update
     deleteProduct(id: ID! @whereKey): Product @delete
 }
 
@@ -47,6 +49,11 @@ input UpdateProductInput {
     parentable_type: String
     parentable_id: Int
     price: UpdatePriceMorphMany
+}
+
+input UpdateStatusProductInput {
+    id: ID!
+    is_active: Boolean
 }
 
 # type Product {

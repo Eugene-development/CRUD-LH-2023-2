@@ -26,6 +26,7 @@ extend type Mutation {
 }
 
 input CreateCategoryInput {
+    id: ID!
     key: String!
     is_active: Boolean
     value: String!
